@@ -89,6 +89,56 @@ class ProductController extends Controller
             ->log(auth()->user()->name. ' update product image');
 
         return redirect()->route('allproducts')->with('message','Update Product Image Successfully');
+    }
+    public function editProduct($id){
+        $product=Product::findOrFail($id);
+        return view('admin.editProduct',compact('product'));
+    }
+    public function updateProduct(Request $request){
+        //dd($request->all());
+        $id=$request->product_id;
+        $request->validate([
+            'product_name' => 'required|unique:products',
+            'price' => 'required|numeric',
+            'quantity' => 'required|integer|min:0',
+            'product_short_des' => 'required',
+            'product_long_des' => 'required',
+        ]);
+        $product=Product::findOrFail($id);
+        $product->product_name=$request->product_name;
+        $product->price=$request->price;
+        $product->quantity=$request->quantity;
+        $product->product_short_des=$request->product_short_des;
+        $product->product_long_des=$request->product_long_des;
+        $product->slug=strtolower(str_replace(' ','-',$request->product_name));
+        $product->save();
+
+        activity('update')
+            ->performedOn($product)
+            ->causedBy(auth()->user()->id)
+            ->withProperties($product)
+            ->log(auth()->user()->name. ' update product');
+
+        return redirect()->route('allproducts')->with('message','Update Product Successfully');
+
+    }
+    public function deleteProduct($id){
+        $cat_id=Product::where('id',$id)->value('product_category_id');
+        $sub_catId=Product::where('id',$id)->value('product_subcategory_id');
+        //return response()->json(['catagory_id'=>$cat_id,'sub_catagory_id'=>$sub_catId]);
+        $product=Product::findOrFail($id);
+        Category::where('id',$cat_id)->decrement('product_count',1);
+        SubCategory::where('id',$sub_catId)->decrement('product_count',1);
+        $product->delete();
+
+        activity('delete')
+            ->performedOn($product)
+            ->causedBy(auth()->user()->id)
+            ->withProperties($product)
+            ->log(auth()->user()->name. ' delete product');
+
+        return redirect()->route('allproducts')->with('message','Delete Product Successfully');
+
 
     }
 }

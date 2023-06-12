@@ -50,10 +50,10 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);"
+                                        <a class="dropdown-item" href="{{route('editproduct',$product->id)}}"
                                         ><i class="bx bx-edit-alt me-2"></i> Edit</a
                                         >
-                                        <a class="dropdown-item" href="javascript:void(0);"
+                                        <a class="dropdown-item" href="#" onclick="confirmDelete({{ $product->id }})"
                                         ><i class="bx bx-trash me-2"></i> Delete</a
                                         >
                                     </div>
@@ -74,5 +74,14 @@
         $(document).ready(function () {
             $('#example').DataTable();
         });
+    </script>
+    <script>
+        function confirmDelete(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                var url = "{{ route('deleteproduct', ['id' => ':id']) }}";
+                url = url.replace(':id', productId);
+                window.location.href = url;
+            }
+        }
     </script>
 @endsection

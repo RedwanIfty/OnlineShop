@@ -69,7 +69,7 @@ class SubCategoryController extends Controller
         $cat_id=SubCategory::where('id',$id)->value('category_id');
         $subCategory=SubCategory::where('id',$id)->first();
         if ($subCategory->product_count>0){
-            return redirect()->route('allsubcategory')->with('errormessage','Category  Deleted Successfully!');
+            return redirect()->route('allsubcategory')->with('errormessage','Can not delete This Category have products!');
         }
         Category::where('id',$cat_id)->decrement('subcategory_count',1);
         $subCategory->delete();
