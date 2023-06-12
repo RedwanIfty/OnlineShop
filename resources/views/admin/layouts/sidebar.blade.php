@@ -1,4 +1,4 @@
-<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-dark">
     <div class="app-brand demo">
         <a href="{{route('admin.dashboard')}}" class="app-brand-link">
             <span class="app-brand-text demo menu-text fw-bolder ms-2">Online Shop</span>
