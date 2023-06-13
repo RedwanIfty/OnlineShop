@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -19,8 +20,11 @@ use \App\Http\Controllers\Admin\ActivityLogController;
 |
 */
 //Route::redirect('/', 'admin/dashboard');
-Route::get('/',function (){
-    return view('welcome');
+//Route::get('/',function (){
+//    return view('home.layouts.home');
+//});
+Route::controller(HomeController::class)->group(function(){
+   Route::get('/','index')->name('homePage');
 });
 Route::get('/user/dashboard',function (){
    return view('user.dashboard');
