@@ -1,15 +1,16 @@
 @extends('home.layouts.template')
 @section('homeTitle')
-    Online-Shop
+    Category-Page
 @endsection
 @section('main-content')
+@if($category->product_count>0)
     <div class="fashion_section">
         <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 @foreach($chunks as $key => $chunk)
                     <div class="carousel-item{{ $key === 0 ? ' active' : '' }}">
                         <div class="container">
-                            <h1 class="fashion_taital">All Products</h1>
+                            <h1 class="fashion_taital">{{$category->category_name}}</h1>
                             <div class="fashion_section_2">
                                 <div class="row">
                                     @foreach($chunk as $product)
@@ -40,4 +41,18 @@
             </a>
         </div>
     </div>
+@else
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 style="text-align: center;color: red;">No Products Available</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endif
 @endsection
