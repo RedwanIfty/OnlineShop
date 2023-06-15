@@ -1,5 +1,6 @@
 @php
 use \App\Models\Category;
+use \App\Models\SubCategory;
 $categories=Category::orderBy('category_name')->get();
 @endphp
 <!DOCTYPE html>
@@ -85,14 +86,22 @@ $categories=Category::orderBy('category_name')->get();
                 </div>
                 <span class="toggle_icon" onclick="openNav()"><img src="{{asset('home/images/toggle-icon.png')}}"></span>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        All Category
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         @foreach($categories as $category)
-                            <a class="dropdown-item" href="{{route('category',[$category->id,$category->slug])}}">{{$category->category_name}}</a>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#" onMouseOver="showSubcategories(this)">{{$category->category_name}}</a>
+                                <ul class="dropdown-menu subcategories">
+
+                                        <li><a class="dropdown-item" href="#">subcategory->subcategory_name</a></li>
+                                </ul>
+                            </li>
                         @endforeach
-                    </div>
+                    </ul>
                 </div>
+
                 <div class="main">
                     <!-- Another variation with a button -->
                     <div class="input-group">
@@ -122,9 +131,13 @@ $categories=Category::orderBy('category_name')->get();
                                     <i class="fa fa-shopping-cart" ><span class="cart-box">0</span></i>
                                     <span class="padding_0"></span></a>
                             </li>
-                            <li><a href="#">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    <span class="padding_10">Login</span></a>
+                            <li><a href="{{route('login')}}">
+                                    <i class="fa fa-user" aria-hidden="true" ></i>
+                                    <span class="padding_10">@auth Dashboard @endauth @guest Login @endguest</span></a>
+                            </li>
+                            <li><a href="{{route('register')}}">
+                                    <i class="fa fa-user" aria-hidden="true" ></i>
+                                    <span class="padding_10">Register</span></a>
                             </li>
                         </ul>
                     </div>
@@ -208,6 +221,16 @@ $categories=Category::orderBy('category_name')->get();
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+</script>
+<script>
+        function showSubcategories(element) {
+        // Hide all subcategory menus
+        $('.subcategories').hide();
+
+        // Show the subcategory menu of the hovered category
+        $(element).next('.subcategories').show();
+    }
+
 </script>
 </body>
 </html>

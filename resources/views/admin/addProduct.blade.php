@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="product_short_des">Product Short description</label>
+                            <label class="col-sm-2 col-form-label " for="product_short_des">Product Short description</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" id="product_short_des" name="product_short_des" cols="30" rows="10">{{old('product_short_des')}}</textarea>
                             </div>
@@ -91,13 +91,6 @@
 @endsection
 @section('js')
     <script>
-        $(document).ready(function() {
-            $('#product_category_id').select2();
-            $('#product_subcategory_id').select2();
-        });
-
-    </script>
-    <script>
         function loadSubcategory(){
             id=$('#product_category_id').val();
             //alert(id);
@@ -116,5 +109,12 @@
 
             });
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#product_category_id').select2();
+            $('#product_subcategory_id').select2();
+        });
+
     </script>
 @endsection

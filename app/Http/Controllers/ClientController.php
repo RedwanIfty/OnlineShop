@@ -14,8 +14,12 @@ class ClientController extends Controller
         $chunks=$categoryProduct->chunk(4);
         return view('home.category',compact('chunks','category'));
     }
-    public function singleProduct(){
-        return view('home.product');
+    public function singleProduct($id,$slug){
+        $product=Product::findOrFail($id);
+        $subCategoryProducts=Product::where('id',$id)->value('product_subcategory_id');
+        $subCatProducts=Product::where('product_subcategory_id',$subCategoryProducts)->get();
+        $chunks=$subCatProducts->chunk(4);
+        return view('home.product',compact('product','chunks'));
     }
     public function addToCard(){
         return view('home.addToCard');
