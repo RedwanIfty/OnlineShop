@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         $user = $request->user();
 
         if ($user->hasRole('user')) {
-            return redirect()->route('user.dashboard');
+            return redirect()->route('userProfile');
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);

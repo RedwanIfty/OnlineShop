@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
                 $user = $request->user();
 
                 if ($user->hasRole('user')) {
-                    return redirect()->route('user.dashboard');
+                    return redirect()->route('userProfile');
                 }
                 return redirect(RouteServiceProvider::HOME);
             }

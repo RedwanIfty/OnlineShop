@@ -30,17 +30,22 @@ Route::controller(HomeController::class)->group(function(){
 Route::controller(ClientController::class)->group(function (){
     Route::get('/category/{id}/{slug}','categoryPage')->name('category');
     Route::get('/single-product/{id}/{slug}','singleProduct')->name('singleProduct');
-    Route::get('/add-to-card','addToCard')->name('addToCard');
-    Route::get('/checkout','checkout')->name('checkout');
-    Route::get('/user-profile','userProfile')->name('userProfile');
-    Route::get('/new-release','newRelease')->name('newRelease');
-    Route::get('/todays-deal','todaysDeal')->name('todaysDeal');
-    Route::get('/customer-service','customerService')->name('customerService');
 
 });
-Route::get('/user/dashboard',function (){
-   return view('user.dashboard');
-})->name('user.dashboard')->middleware(['auth','role:user']);
+Route::middleware(['auth','role:user'])->group(function (){
+    Route::controller(ClientController::class)->group(function (){
+        Route::get('/add-to-card','addToCard')->name('addToCard');
+        Route::get('/checkout','checkout')->name('checkout');
+        Route::get('/user-profile','userProfile')->name('userProfile');
+        Route::get('/new-release','newRelease')->name('newRelease');
+        Route::get('/todays-deal','todaysDeal')->name('todaysDeal');
+        Route::get('/customer-service','customerService')->name('customerService');
+
+    });
+});
+//Route::get('/user/dashboard',function (){
+//   return view('user.dashboard');
+//})->name('user.dashboard')->middleware(['auth','role:user']);
 Route::middleware(['auth','role:user'])->group(function(){
     Route::get('/dashboard', function () {
         return view('dashboard');

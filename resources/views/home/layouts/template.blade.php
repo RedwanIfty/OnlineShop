@@ -133,12 +133,31 @@ $categories=Category::orderBy('category_name')->get();
                             </li>
                             <li><a href="{{route('login')}}">
                                     <i class="fa fa-user" aria-hidden="true" ></i>
-                                    <span class="padding_10">@auth Dashboard @endauth @guest Login @endguest</span></a>
+                                    <span class="padding_10">@auth Dashboard
+                                        @endauth
+                                        @guest Login @endguest</span></a>
                             </li>
+                            @guest
                             <li><a href="{{route('register')}}">
                                     <i class="fa fa-user" aria-hidden="true" ></i>
                                     <span class="padding_10">Register</span></a>
                             </li>
+                            @endguest
+                            @auth
+                               @foreach(auth()->user()->roles as $role)
+                                   @if($role->id==2)
+                                        <li>
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <a class="fa fa-sign-out" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                    <i class="bx bx-power-off me-2"></i>
+                                                    <span class="align-middle">Log Out</span>
+                                                </a>
+                                            </form>
+                                        </li>
+                                   @endif
+                               @endforeach
+                            @endauth
                         </ul>
                     </div>
                 </div>
