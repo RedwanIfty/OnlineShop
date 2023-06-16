@@ -1,6 +1,7 @@
 @php
 use \App\Models\Category;
 use \App\Models\SubCategory;
+use \App\Models\Cart;
 $categories=Category::orderBy('category_name')->get();
 @endphp
 <!DOCTYPE html>
@@ -127,8 +128,13 @@ $categories=Category::orderBy('category_name')->get();
                     </div>
                     <div class="login_menu">
                         <ul>
-                            <li><a href="#">
-                                    <i class="fa fa-shopping-cart" ><span class="cart-box">0</span></i>
+                            <li><a href="{{route('addToCard')}}">
+                                    @auth
+                                    @php
+                                        $totalIteams=Cart::where('user_id',auth()->user()->id)->count();
+                                    @endphp
+                                    @endauth
+                                    <i class="fa fa-shopping-cart" ><span class="cart-box"><sup>@guest @endguest @auth {{$totalIteams}} @endauth</sup></span></i>
                                     <span class="padding_0"></span></a>
                             </li>
                             <li><a href="{{route('login')}}">

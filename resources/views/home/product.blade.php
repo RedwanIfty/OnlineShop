@@ -30,9 +30,10 @@
                         <form action="{{route('addproducttocard',$product->id)}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <input class="form-group" type="hidden" value="{{$product->id}}" name="product_id">
+                                <input type="hidden" value="{{$product->id}}" name="product_id">
+                                <input type="hidden" value="{{$product->price}}" name="price">
                                 <label for="product_quantity">Quantity :
-                                    <input class="form-group" type="number" min="1">
+                                    <input class="form-group" type="number" min="1" name="quantity" value="1">
                                 </label>
                                 <br>
                                 <input class="btn btn-warning" type="submit" value="Add to Card">
@@ -62,8 +63,10 @@
                                                         <form action="{{route('addproducttocard',$product->id)}}" method="post">
                                                             @csrf
                                                             <div class="form-group">
-                                                                <input class="form-group" type="hidden" value="{{$product->id}}" name="product_id">
-                                                               <input class="btn btn-warning" type="submit" value="Buy">
+                                                                <input type="hidden" value="{{$product->id}}" name="product_id">
+                                                                <input type="hidden" value="{{$product->price}}" name="price">
+                                                                <input type="hidden" value="1" name="quantity">
+                                                                <input class="btn btn-warning" type="submit" value="Buy">
                                                             </div>
                                                         </form>
                                                         <div class="seemore_bt">
