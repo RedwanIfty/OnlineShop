@@ -72,7 +72,14 @@ class ClientController extends Controller
 
     }
     public function checkout(){
-        return view('home.checkout');
+        $userId=auth()->user()->id;
+        $cart_items=Cart::leftJoin('products','carts.product_id','products.id')
+            ->select('carts.id','products.product_name','products.product_img','carts.quantity','carts.price')
+            ->where('carts.user_id',$userId)
+            ->orderByDesc('carts.created_at','asc')
+            ->get();
+        $shipping_address=ShippingInfo::where('user_id',$userId)->first();
+        return view('home.checkout',compact('cart_items','shipping_address'));
     }
     public function userProfile(){
         return view('home.userprofile');
