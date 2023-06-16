@@ -35,6 +35,7 @@ Route::controller(ClientController::class)->group(function (){
 Route::middleware(['auth','role:user'])->group(function (){
     Route::controller(ClientController::class)->group(function (){
         Route::get('/add-to-card','addToCard')->name('addToCard');
+        Route::post('/add-product-to-card/{id}','addProductToCard')->name('addproducttocard');
         Route::get('/checkout','checkout')->name('checkout');
         Route::get('/user-profile','userProfile')->name('userProfile');
         Route::get('/new-release','newRelease')->name('newRelease');

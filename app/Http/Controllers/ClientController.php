@@ -24,6 +24,9 @@ class ClientController extends Controller
     public function addToCard(){
         return view('home.addToCard');
     }
+    public function addProductToCard($id){
+        dd($id);
+    }
     public function checkout(){
         return view('home.checkout');
     }
