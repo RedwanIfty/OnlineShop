@@ -49,5 +49,14 @@
                 </div>
             </div>
         </div>
+        <form>
+            @csrf
+            <input type="submit" value="Cancel Order" class="btn btn-danger">
+        </form>
+        &nbsp
+        <form action="{{route('placeOrder')}}" method="POST">
+            @csrf
+            <input type="submit" value="Place Order" class="btn btn-secondary">
+        </form>
     </div>
 @endsection

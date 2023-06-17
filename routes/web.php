@@ -38,13 +38,14 @@ Route::middleware(['auth','role:user'])->group(function (){
         Route::post('/add-product-to-card/{id}','addProductToCard')->name('addproducttocard');
         Route::get('/shipping-address','getShippingAddress')->name('shippingaddress');
         Route::post('/add-shipping-address','addShippingAddress')->name('addshippingaddress');
+        Route::post('/place-order','placeOrder')->name('placeOrder');
         Route::get('/checkout','checkout')->name('checkout');
         Route::get('/user-profile','userProfile')->name('userProfile');
         Route::get('/new-release','newRelease')->name('newRelease');
         Route::get('/todays-deal','todaysDeal')->name('todaysDeal');
         Route::get('/customer-service','customerService')->name('customerService');
         Route::get('/remove-cart-item/{id}',"removeCartItem")->name('removecartitem');
-
+        Route::get('/pending-orders','pendingOrders')->name('userPendingOrders');
     });
 });
 //Route::get('/user/dashboard',function (){
