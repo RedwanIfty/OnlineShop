@@ -90,6 +90,30 @@ class ProductController extends Controller
 
         return redirect()->route('allproducts')->with('message','Update Product Image Successfully');
     }
+    public function editProductQunatity($id){
+        $productQuantity=Product::findOrFail($id);
+        return view('admin.editProductQunatity',compact('productQuantity'));
+    }
+    public function updateProductQuantity(Request $request){
+        $request->validate([
+            'quantity' => 'required',
+        ]);
+        //dd($request->all());
+        $id=$request->product_id;
+        $product=Product::findOrFail($id);
+//        return $product;
+        $product->quantity=$request->quantity;
+        $product->save();
+
+        activity('update')
+            ->performedOn($product)
+            ->causedBy(auth()->user()->id)
+            ->withProperties($product)
+            ->log(auth()->user()->name. ' update product quantity');
+
+        return redirect()->route('allproducts')->with('message','Update Product Quantity Successfully');
+
+    }
     public function editProduct($id){
         $product=Product::findOrFail($id);
         return view('admin.editProduct',compact('product'));
@@ -98,16 +122,16 @@ class ProductController extends Controller
         //dd($request->all());
         $id=$request->product_id;
         $request->validate([
-            'product_name' => 'required|unique:products',
+            'product_name' => 'required',
             'price' => 'required|numeric',
-            'quantity' => 'required|integer|min:0',
+//            'quantity' => 'required|integer|min:0',
             'product_short_des' => 'required',
             'product_long_des' => 'required',
         ]);
         $product=Product::findOrFail($id);
         $product->product_name=$request->product_name;
         $product->price=$request->price;
-        $product->quantity=$request->quantity;
+//        $product->quantity=$request->quantity;
         $product->product_short_des=$request->product_short_des;
         $product->product_long_des=$request->product_long_des;
         $product->slug=strtolower(str_replace(' ','-',$request->product_name));

@@ -54,7 +54,9 @@
 
     <x-guest-layout>
         @if(\Illuminate\Support\Facades\Session::has('success'))
-            <div class="alert-success">{{\Illuminate\Support\Facades\Session::get('success')}}</div>
+            <div class="alert alert-success">
+                {{\Illuminate\Support\Facades\Session::get('success')}}
+            </div>
         @endif
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />

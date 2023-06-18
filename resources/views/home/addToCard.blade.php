@@ -45,7 +45,7 @@
                             @if($total>0)
                                 <tr>
                                     <td></td>
-                                    <td></td>>
+                                    <td></td>
                                     <td>Total</td>
                                     <td>{{$total}}</td>
                                         <td><a class="btn btn-primary" href="{{route('shippingaddress')}}" >Check out</a></td>

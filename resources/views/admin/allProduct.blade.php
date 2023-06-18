@@ -40,10 +40,13 @@
                             <td>{{$product->product_name}}</td>
                             <td>
                                 <img src="{{asset($product->product_img)}}" height="50px" alt="no image found"><br>
-                                <a href="{{route('editimg',[$product->id,$product->product_name])}}" class="bx bx-edit-alt me-2"> </a>
+                                <a href="{{route('editimg',[$product->id,$product->slug])}}" class="bx bx-edit-alt me-2"> </a>
                             </td>
                             <td>{{$product->price}}</td>
-                            <td>{{$product->quantity}}</td>
+                            <td>
+                                {{$product->quantity}}<br>
+                                <a href="{{route('editqunatity',[$product->id,$product->slug])}}" class="bx bx-edit-alt me-2"> </a>
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

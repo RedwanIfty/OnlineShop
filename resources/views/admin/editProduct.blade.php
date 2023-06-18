@@ -36,12 +36,12 @@
                                 <input type="number" class="form-control" id="price" name="price" placeholder="Price" value="{{$product->price}}" />
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="quantity">Quantity</label>
-                            <div class="col-sm-10">
-                                <input type="number" min="0" class="form-control" id="quantity" name="quantity" placeholder="Quantity" value="{{$product->quantity}}"  />
-                            </div>
-                        </div>
+{{--                        <div class="row mb-3">--}}
+{{--                            <label class="col-sm-2 col-form-label" for="quantity">Quantity</label>--}}
+{{--                            <div class="col-sm-10">--}}
+{{--                                <input type="number" min="0" class="form-control" id="quantity" name="quantity" placeholder="Quantity" value="{{$product->quantity}}"  />--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="product_short_des">Product Short description</label>
                             <div class="col-sm-10">
