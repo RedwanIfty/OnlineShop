@@ -87,7 +87,7 @@
 <div class="container">
     <div class="card login-card">
         <div class="card-header login-card-header">
-            <h1 class="card-title login-card-title">Register</h1>
+            <h1 class="card-title login-card-title"><a href="/">Register</a></h1>
         </div>
         <div class="card-body login-card-body">
             <form action="{{ route('register') }}" method="POST">

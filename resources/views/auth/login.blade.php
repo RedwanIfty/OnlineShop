@@ -87,7 +87,7 @@
 <div class="container">
     <div class="card login-card">
         <div class="card-header login-card-header">
-            <h1 class="card-title login-card-title">Login</h1>
+            <h1 class="card-title login-card-title"><a href="/">Login</a></h1>
             @if(session()->has('success'))
                 <div class="alert alert-success">
                     {{session()->get('success')}}
