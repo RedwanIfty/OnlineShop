@@ -14,6 +14,8 @@
                             <th>Product Name</th>
                             <th>Quantity</th>
                             <th>Price</th>
+                            <th>Order Time</th>
+                            <th>Delivery Time</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -26,6 +28,8 @@
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ $completedOrder->quantity }}</td>
                                 <td>{{ $completedOrder->total_price }}</td>
+                                <td>{{ $completedOrder->created_at->format('d-F-Y') }}</td>
+                                <td>{{ $completedOrder->updated_at->format('d-F-Y') }}</td>
                             </tr>
                         @endforeach
                         </tbody>

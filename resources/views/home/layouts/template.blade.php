@@ -96,7 +96,6 @@ $categories=Category::orderBy('category_name')->get();
                             <li class="dropdown-submenu">
                                 <a class="dropdown-item dropdown-toggle" href="#" onMouseOver="showSubcategories(this)">{{$category->category_name}}</a>
                                 <ul class="dropdown-menu subcategories">
-
                                         <li><a class="dropdown-item" href="#">subcategory->subcategory_name</a></li>
                                 </ul>
                             </li>

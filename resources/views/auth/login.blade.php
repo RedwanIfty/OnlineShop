@@ -1,108 +1,132 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<html
-    lang="en"
-    class="light-style layout-menu-fixed"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-path="{{asset('dashboard/assets')}}/"
-    data-template="vertical-menu-template-free"
->
 <head>
-    <meta charset="utf-8" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .error {
+            color: red;
+        }
 
-    <title>@yield('title')</title>
+        body {
+            background-image: url('/home/images/banner-bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
 
-    <meta name="description" content="" />
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{asset('dashboard/assets/img/favicon/favicon.ico')}}" />
+        .login-card {
+            margin: 0 auto;
+            max-width: 400px;
+            margin-top: 100px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet"
-    />
+        .login-card-header {
+            background-color: transparent;
+            padding: 30px;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="{{asset('dashboard/assets/vendor/fonts/boxicons.css')}}" />
+        .login-card-title {
+            margin-bottom: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="{{asset('dashboard/assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{asset('dashboard/assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{asset('dashboard/assets/css/demo.css')}}" />
+        .login-card-body {
+            padding: 30px;
+            background-color: transparent;
+        }
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 10px;
+        }
 
-    <link rel="stylesheet" href="{{asset('dashboard/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+            border-color: #007bff;
+        }
 
-    <!-- Page CSS -->
+        .login-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
 
-    <!-- Helpers -->
-    <script src="{{asset('dashboard/assets/vendor/js/helpers.js')}}"></script>
+        .login-btn:hover {
+            background-color: #0069d9;
+        }
 
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{asset('dashboard/assets/js/config.js')}}"></script>
+        .forgot-password-link,
+        .signup-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
-    <x-guest-layout>
-        @if(\Illuminate\Support\Facades\Session::has('success'))
-            <div class="alert alert-success">
-                {{\Illuminate\Support\Facades\Session::get('success')}}
-            </div>
-        @endif
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+<body>
+<div class="container">
+    <div class="card login-card">
+        <div class="card-header login-card-header">
+            <h1 class="card-title login-card-title">Login</h1>
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{session()->get('success')}}
+                </div>
+            @endif
+        </div>
+        <div class="card-body login-card-body">
+            <form action="/login" method="POST">
+                @csrf
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+                <div class="form-group">
+                    <label for="email">Email/Username:</label>
+                    <input type="text" id="email" name="email" class="form-control"
+                           placeholder="Enter your email or username">
+                    @error('email')
+                    <p class="error">{{ $message }}</p>
+                    @enderror
+                </div>
 
-            <!-- Email Address -->
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control"
+                           placeholder="Enter your password">
+                    @error('password')
+                    <p class="error">{{ $message }}</p>
+                    @enderror
+                </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <p class="text-center mt-3">
+                <a href="#" class="forgot-password-link">Forgot Password?</a> |
+                <a href="{{route('register')}}" class="signup-link">Sign Up</a>
+            </p>
+        </div>
+    </div>
+</div>
 
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
 
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-    {{--            @if (Route::has('password.request'))--}}
-    {{--                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">--}}
-    {{--                    {{ __('Forgot your password?') }}--}}
-    {{--                </a>--}}
-    {{--            @endif--}}
-
-                <x-primary-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </x-guest-layout>
 </html>
-
