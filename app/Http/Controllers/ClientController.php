@@ -35,6 +35,12 @@ class ClientController extends Controller
         return view('home.addToCard',compact('cart_items'));
     }
     public function addProductToCard($id,Request $request){
+        $productQuantity=Product::where('id',$request->product_id)->first();
+        if ($productQuantity->quantity < $request->quantity) {
+            $shortageQuantity = $request->quantity - $productQuantity->quantity;
+            $message = 'Sorry, only ' . $productQuantity->quantity . ' items are available. You requested ' . $request->quantity . ', but there is a shortage of ' . $shortageQuantity . ' items.';
+            return redirect()->route('addToCard')->with('message', $message);
+        }
         $product_price=$request->price;
         $product_quantity=$request->quantity;
         $price=$product_price * $product_quantity;
@@ -46,7 +52,7 @@ class ClientController extends Controller
         //var_dump($request->all());
         $cart->save();
 
-        return redirect()->route('addToCard')->with('message','Iteam added to cart successfully');
+        return redirect()->route('addToCard')->with('message','Item added to cart successfully');
     }
     public function removeCartItem($id){
         Cart::findOrFail($id)->delete();
