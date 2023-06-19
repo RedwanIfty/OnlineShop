@@ -36,10 +36,11 @@ $categories=Category::orderBy('category_name')->get();
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- owl stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('home/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('home/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 </head>
+
 
 <body>
 <!-- banner bg main start -->
@@ -230,32 +231,29 @@ $categories=Category::orderBy('category_name')->get();
 </div>
 <!-- copyright section end -->
 <!-- Javascript files-->
-<script src="{{asset('home/js/jquery.min.js')}}"></script>
-<script src="{{asset('home/js/popper.min.js')}}"></script>
-<script src="{{asset('home/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('home/js/jquery-3.0.0.min.js')}}"></script>
-<script src="{{asset('home/js/plugin.js')}}"></script>
-<!-- sidebar -->
-<script src="{{asset('home/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
-<script src="{{asset('home/js/custom.js')}}"></script>
+<!-- jquery library -->
+<script src="{{ asset('home/js/jquery.min.js') }}"></script>
+<!-- bootstrap js -->
+<script src="{{ asset('home/js/bootstrap.bundle.js') }}"></script>
+<!-- owl slider -->
+<!-- custom js -->
+<script src="{{ asset('home/js/custom.js') }}"></script>
+<!-- Scrollbar Js Files -->
+<script src="{{ asset('home/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+<!-- fancybox -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<!-- DataTables -->
+<script src="{{ asset('home/js/jquery.min.js') }}"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables initialization -->
 <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "200px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
-<script>
-        function showSubcategories(element) {
-        // Hide all subcategory menus
-        $('.subcategories').hide();
-
-        // Show the subcategory menu of the hovered category
-        $(element).next('.subcategories').show();
-    }
-
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "pageLength": 5 // Display 5 items per page
+        });
+    });
 </script>
 </body>
 </html>

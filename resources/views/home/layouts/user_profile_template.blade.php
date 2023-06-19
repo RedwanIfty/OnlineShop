@@ -10,7 +10,7 @@
                 <ul>
                     <li><a href="{{route('userProfile')}}">Dashboard</a><li>
                     <li><a href="{{route('userPendingOrders')}}">Pending Order</a></li>
-                    <li><a href="#">History</a><li>
+                    <li><a href="{{route('history')}}">History</a><li>
                 </ul>
             </div>
         </div>

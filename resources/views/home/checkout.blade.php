@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <form>
+        <form action="{{route('cancelOrder')}}" method="POST" onsubmit="return confirm('Are you sure you want to place the order?')">
             @csrf
             <input type="submit" value="Cancel Order" class="btn btn-danger">
         </form>

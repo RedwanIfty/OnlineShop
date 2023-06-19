@@ -1,8 +1,7 @@
 @extends('home.layouts.user_profile_template')
 
 @section('profilecontent')
-    <h1 class="text-center"><span style="color:green;">Welcome {{auth()->user()->name}}</span></h1>
-    <h4 class="text-center">Completed Order list</h4>
+    <h4 class="text-center">Order list</h4>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -14,18 +13,28 @@
                             <th>Product Name</th>
                             <th>Quantity</th>
                             <th>Price</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($completedOrders as $completedOrder)
+                        @foreach($orders as $order)
                             <tr>
                                 @php
-                                    $product = \App\Models\Product::find($completedOrder->product_id);
+                                    $product = \App\Models\Product::find($order->product_id);
                                 @endphp
                                 <td><img src="{{ asset($product->product_img) }}" style="height: 50px"></td>
                                 <td>{{ $product->product_name }}</td>
-                                <td>{{ $completedOrder->quantity }}</td>
-                                <td>{{ $completedOrder->total_price }}</td>
+                                <td>{{ $order->quantity }}</td>
+                                <td>{{ $order->total_price }}</td>
+                                <td>
+                                    @if($order->status=='delivered')
+                                        <span style="color: green">{{$order->status}}<span>
+                                    @elseif($order->status=='pending')
+                                        <span style="color: yellow">{{$order->status}}<span>
+                                    @else
+                                        <span style="color:red">{{$order->status}}</span>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

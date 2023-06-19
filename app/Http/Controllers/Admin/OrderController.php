@@ -15,5 +15,25 @@ class OrderController extends Controller
 
         return view('admin.pendingOrders',compact('ordersData'));
     }
+    public function deliverProduct($id){
+//        $orderItem=Order::where()
+        $order = Order::where('user_id', $id)->where('status', 'pending')->update([
+            'status' => 'delivered'
+        ]);
+
+      //  $orderModel = Order::find($order); // Assuming the Order model has a primary key of 'id'
+//            activity('update')
+//                ->performedOn($id)
+//                ->causedBy(auth()->user()->id)
+//                ->withProperties('product delivered')
+//                ->log(auth()->user()->name. ' product delivered');
+
+
+        return back()->with('message','Product Delivered Successfully');
+    }
+    public function completeOrders(){
+        $ordersData=Order::where('status','delivered')->latest()->get();
+        return view('admin.completedOrders',compact('ordersData'));
+    }
 
 }

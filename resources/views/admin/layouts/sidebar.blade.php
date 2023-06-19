@@ -74,7 +74,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="{{route('completeOrders')}}" class="menu-link">
                 <i class="tf-icons bx bx-check-circle"></i>
                 <div data-i18n="Analytics">Completed Order</div>
             </a>

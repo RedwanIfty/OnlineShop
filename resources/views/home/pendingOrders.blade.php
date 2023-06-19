@@ -13,13 +13,16 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <td>Image</td>
-                            <td>Product Name</td>
-                            <td>Quantity</td>
-                            <td>Price</td>
-                        </tr>
+                    <table class="table" id="example">
+                        <thead>
+                            <tr>
+                                <td>Image</td>
+                                <td>Product Name</td>
+                                <td>Quantity</td>
+                                <td>Price</td>
+                            </tr>
+                        </thead>
+                        <tbody>
                         @foreach($pendingOrders as $pendingOrder)
                             <tr>
                                 @php
@@ -31,6 +34,7 @@
                                 <td>{{$pendingOrder->total_price}}</td>
                             </tr>
                         @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

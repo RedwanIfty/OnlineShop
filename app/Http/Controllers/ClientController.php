@@ -127,13 +127,47 @@ class ClientController extends Controller
 
         return redirect()->route('userPendingOrders')->with('message', 'Your orders have been placed successfully');
     }
+    public function cancelOrder(){
+        $userId = auth()->user()->id;
+        $shipping_address = ShippingInfo::where('user_id', $userId)->first();
+        $cart_items = Cart::where('user_id', $userId)->get();
 
+        foreach ($cart_items as $item) {
+
+                // Create the order
+                $order = new Order();
+                $order->user_id = $userId;
+                $order->shipping_phoneNumber = $shipping_address->phone_number;
+                $order->shipping_city = $shipping_address->city_name;
+                $order->shipping_postalcode = $shipping_address->postal_code;
+                $order->product_id = $item->product_id;
+                $order->quantity = $item->quantity;
+                $order->total_price = $item->price;
+                $order->status="cancel";
+                $order->save();
+
+                // Delete the item from the cart
+                $item->delete();
+        }
+
+        // Delete the shipping information
+        ShippingInfo::where('user_id', $userId)->delete();
+
+        return redirect()->route('userPendingOrders')->with('message', 'Your orders have been cancel successfully');
+
+    }
     public function pendingOrders(){
         $pendingOrders=Order::where('status','pending')->where('user_id',auth()->user()->id)->latest()->get();
         return view('home.pendingOrders',compact('pendingOrders'));
     }
     public function userProfile(){
-        return view('home.userprofile');
+        $completedOrders=Order::where('user_id',auth()->user()->id)
+            ->where('status','delivered')->latest()->get();
+        return view('home.userprofile',compact('completedOrders'));
+    }
+    public function history(){
+        $orders=Order::where('user_id',auth()->user()->id)->latest()->get();
+        return view('home.history',compact('orders'));
     }
     public function newRelease(){
         return view('home.newRelease');

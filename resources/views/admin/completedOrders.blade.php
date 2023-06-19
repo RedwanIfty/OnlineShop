@@ -4,18 +4,13 @@
 @endphp
 @extends('admin.layouts.app')
 @section('title')
-    Pending Orders
+    Completed Orders
 @endsection
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> Pending Orders</h4>
-        @if(session()->has('message'))
-            <div class="alert alert-success">
-                {{session()->get('message')}}
-            </div>
-        @endif
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> Completed Orders</h4>
         <div class="card">
-            <div class="card-header">Pending List</div>
+            <div class="card-header">Completed Orders</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table" id="example">
@@ -24,7 +19,6 @@
                             <th>User Name</th>
                             <th>Products</th>
                             <th>Information's</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -64,9 +58,6 @@
                                         <li>City/Village:{{ $shippingCity }}</li>
                                         <li>Postal Code: {{ $shippingPostalCode }}</li>
                                     </ol>
-                                </td>
-                                <td>
-                                    <a href="{{route('deliverProduct',$userId)}}" class="btn btn-primary">Deliver</a>
                                 </td>
                             </tr>
                         @endforeach
