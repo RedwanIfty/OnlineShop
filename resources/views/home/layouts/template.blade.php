@@ -255,5 +255,14 @@ $categories=Category::orderBy('category_name')->get();
         });
     });
 </script>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 </body>
 </html>
