@@ -15,4 +15,9 @@ class DashboardController extends Controller
         $totalOrder=Order::count();
         return view('admin.dashboard',compact('userCount','totalSell','totalOrder'));
     }
+    public function userCountUpdate()
+    {
+        $userCount = RuleUser::where('role_id', 2)->count();
+        event(new NoticeEvent($userCount));
+    }
 }

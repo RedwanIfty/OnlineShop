@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\NoticeEvent;
 use App\Http\Controllers\Controller;
+use App\Models\RuleUser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -41,10 +43,12 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_active'=>2
         ]);
         $user->addRole('user');
         event(new Registered($user));
-
+        $userCount=RuleUser::where('role_id',2)->count();
+        NoticeEvent::dispatch($userCount);
         //Auth::login($user);
         Session::flash('success','Successfully Registered');
         return redirect()->route('login');

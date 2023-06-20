@@ -36,6 +36,25 @@
     <!-- Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!-- Config: Mandatory theme config file contains global vars & default theme options, Set your preferred theme option in this file. -->
     <script src="{{asset('dashboard/assets/js/config.js')}}"></script>
+{{--    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>--}}
+{{--    <script>--}}
+{{--        // Enable Pusher logging - don't include this in production--}}
+{{--        Pusher.logToConsole = true;--}}
+
+{{--        var pusher = new Pusher('b73f7c86ee3c8bda3908', {--}}
+{{--            cluster: 'ap2'--}}
+{{--        });--}}
+
+{{--        var channel = pusher.subscribe('e-commerce');--}}
+{{--        channel.bind('notify', function(data) {--}}
+{{--            // Update the user count on the dashboard--}}
+{{--            document.getElementById('userCount').innerText = data.message;--}}
+{{--        });--}}
+{{--    </script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js" integrity="sha512-OmBbzhZ6lgh87tQFDVBHtwfi6MS9raGmNvUNTjDIBb/cgv707v9OuBVpsN6tVVTLOehRFns+o14Nd0/If0lE/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
