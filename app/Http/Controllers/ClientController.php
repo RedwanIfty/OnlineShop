@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\ShippingInfo;
 use Illuminate\Http\Request;
 
@@ -19,10 +20,24 @@ class ClientController extends Controller
     }
     public function singleProduct($id,$slug){
         $product=Product::findOrFail($id);
+        $reviews=Review::where('product_id',$id)->orderByDesc('created_at')->paginate(5);
+        //return $reviews;
         $subCategoryProducts=Product::where('id',$id)->value('product_subcategory_id');
         $subCatProducts=Product::where('product_subcategory_id',$subCategoryProducts)->get();
         $chunks=$subCatProducts->chunk(4);
-        return view('home.product',compact('product','chunks'));
+        return view('home.product',compact('product','chunks','reviews'));
+    }
+    public function productReviews(Request $request,$id){
+        $product=Product::findOrFail($id);
+        $review=new Review();
+        $review->user_id=auth()->user()->id;
+        $review->user_name=auth()->user()->name;
+        $review->product_id=$product->id;
+        $review->product_name=$product->product_name;
+        $review->reviews=$request->review;
+        $review->save();
+
+        return back()->with('message', "Your's reviews added successfully");
     }
     public function addToCard(){
         $user_id=auth()->user()->id;

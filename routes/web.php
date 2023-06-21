@@ -48,6 +48,7 @@ Route::middleware(['auth','role:user'])->group(function (){
         Route::get('/remove-cart-item/{id}',"removeCartItem")->name('removecartitem');
         Route::get('/pending-orders','pendingOrders')->name('userPendingOrders');
         Route::get('/product-history','history')->name('history');
+        Route::post('/product-review/{id}','productReviews')->name('productreviews');
     });
 });
 //Route::get('/user/dashboard',function (){

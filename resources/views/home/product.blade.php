@@ -3,7 +3,13 @@
     Product-Page
 @endsection
 @section('main-content')
-    <div class="container">
+    <div class="text-center"><h1 style="color:green;">Products details</h1></div>
+    @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+    <div class="container wrapper">
         <div class="row">
             <div class="col-lg-4">
                 <div class="box_main">
@@ -36,7 +42,7 @@
                                     <input class="form-group" type="number" min="1" name="quantity" value="1">
                                 </label>
                                 <br>
-                                <input class="btn btn-warning" type="submit" value="Add to Card">
+                                <input class="btn btn-warning" type="submit" value="Add to Cart">
                             </div>
                         </form>
                     </div>
@@ -47,7 +53,7 @@
             <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     @foreach($chunks as $key => $chunk)
-                        <div class="carousel-item   {{ $key === 0 ? ' active' : '' }}">
+                        <div class="carousel-item{{ $key === 0 ? ' active' : '' }}">
                             <div class="container">
                                 <h1 class="fashion_taital">Related products</h1>
                                 <div class="fashion_section_2">
@@ -91,6 +97,49 @@
                     <i class="fa fa-angle-right"></i>
                 </a>
             </div>
+        </div>
+
+        <div class="customer-review">
+            @auth
+                @foreach(auth()->user()->roles as $role)
+                    @if($role->id===2)
+                        <h2 class="text-center">Customer Reviews</h2>
+                        <form action="{{route('productreviews',$product->id)}}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="review">Leave a Review:</label>
+                                <textarea class="form-control" rows="5" id="review" name="review" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </form>
+                    @endif
+                @endforeach
+            @endauth
+            <br>
+                @if(count($reviews)>0)
+                    <h2 class="text-center">Product Reviews</h2>
+                    @foreach($reviews as $review)
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card my-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{$review->user_name}}</h5>
+                                        <p class="card-text">{{$review->reviews}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <div class="d-flex justify-content-center">
+                        {{ $reviews->links() }}
+                    </div>
+                @else
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="text-center">No reviews</h1>
+                        </div>
+                    </div>
+                @endif
         </div>
     </div>
 @endsection
