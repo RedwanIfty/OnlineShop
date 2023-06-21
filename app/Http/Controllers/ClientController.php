@@ -175,9 +175,18 @@ class ClientController extends Controller
         $orders=Order::where('user_id',auth()->user()->id)->latest()->get();
         return view('home.history',compact('orders'));
     }
-    public function newRelease(){
-        return view('home.newRelease');
+    public function newRelease()
+    {
+        $sevenDaysAgo = now()->subDays(1);
+        $allProducts = Product::where('created_at', '>=', $sevenDaysAgo)
+            ->orderBy('product_category_name')
+            ->get();
+
+        $chunks = $allProducts->chunk(4);
+
+        return view('home.newRelease', compact('chunks'));
     }
+
     public function todaysDeal(){
         return view('home.todaysDeal');
     }
