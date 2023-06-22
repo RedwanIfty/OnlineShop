@@ -130,7 +130,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-end">
                         {{ $reviews->links() }}
                     </div>
                 @else

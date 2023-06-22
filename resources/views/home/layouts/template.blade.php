@@ -115,17 +115,17 @@ $categories=Category::orderBy('category_name')->get();
                     </div>
                 </div>
                 <div class="header_box">
-                    <div class="lang_box ">
-                        <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
-                            <img src="{{asset('home/images/flag-uk.png')}}" alt="flag" class="mr-2 " title="United Kingdom"> English <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
-                        </a>
-                        <div class="dropdown-menu ">
-                            <a href="#" class="dropdown-item">
-                                <img src="{{asset('home/images/flag-france.png')}}" class="mr-2" alt="flag">
-                                French
-                            </a>
-                        </div>
-                    </div>
+{{--                    <div class="lang_box ">--}}
+{{--                        <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">--}}
+{{--                            <img src="{{asset('home/images/flag-uk.png')}}" alt="flag" class="mr-2 " title="United Kingdom"> English <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>--}}
+{{--                        </a>--}}
+{{--                        <div class="dropdown-menu ">--}}
+{{--                            <a href="#" class="dropdown-item">--}}
+{{--                                <img src="{{asset('home/images/flag-france.png')}}" class="mr-2" alt="flag">--}}
+{{--                                French--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="login_menu">
                         <ul>
                             <li><a href="{{route('addToCard')}}">
@@ -179,7 +179,7 @@ $categories=Category::orderBy('category_name')->get();
                         <div class="row">
                             <div class="col-sm-12">
                                 <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
-                                <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                                <div class="buynow_bt"><a href="{{route('homePage')}}">Buy Now</a></div>
                             </div>
                         </div>
                     </div>

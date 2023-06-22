@@ -16,11 +16,18 @@ class OrderController extends Controller
         return view('admin.pendingOrders',compact('ordersData'));
     }
     public function deliverProduct($id){
-//        $orderItem=Order::where()
+        $orderItems=Order::where('user_id',$id)->where('status', 'pending')->get();
         $order = Order::where('user_id', $id)->where('status', 'pending')->update([
             'status' => 'delivered'
         ]);
-
+        foreach ($orderItems as $orderItem){
+            $oI=Order::where('id',$orderItem->id)->first();
+            activity('update')
+                ->performedOn($oI)
+                ->causedBy(auth()->user()->id)
+                ->withProperties($oI)
+                ->log(auth()->user()->name. ' delivered product');
+        }
       //  $orderModel = Order::find($order); // Assuming the Order model has a primary key of 'id'
 //            activity('update')
 //                ->performedOn($id)
