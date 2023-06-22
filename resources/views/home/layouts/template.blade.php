@@ -179,7 +179,7 @@ $categories=Category::orderBy('category_name')->get();
                         <div class="row">
                             <div class="col-sm-12">
                                 <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
-                                <div class="buynow_bt"><a href="{{route('homePage')}}">Buy Now</a></div>
+                                <div class="buynow_bt" style="padding: 10px"><a href="{{route('homePage')}}">Buy Now</a></div>
                             </div>
                         </div>
                     </div>

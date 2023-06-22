@@ -98,7 +98,9 @@
                 </a>
             </div>
         </div>
-
+        <a class="text-center" href="{{route('homePage')}}">
+           Home
+        </a>
         <div class="customer-review">
             @auth
                 @foreach(auth()->user()->roles as $role)
