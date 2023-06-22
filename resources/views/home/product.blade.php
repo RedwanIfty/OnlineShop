@@ -99,7 +99,7 @@
             </div>
         </div>
         <a class="text-center" href="{{route('homePage')}}">
-           Home
+           Back to Home
         </a>
         <div class="customer-review">
             @auth
@@ -127,6 +127,11 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{$review->user_name}}</h5>
                                         <p class="card-text">{{$review->reviews}}</p>
+                                        @isset(auth()->user()->id)
+                                            @if($review->user_id===auth()->user()->id)
+                                                <i class="bx bx-edit"><a href="" >Edit</a></i>
+                                            @endif
+                                        @endisset
                                     </div>
                                 </div>
                             </div>
