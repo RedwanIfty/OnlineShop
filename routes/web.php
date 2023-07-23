@@ -48,6 +48,8 @@ Route::middleware(['auth','role:user'])->group(function (){
         Route::get('/remove-cart-item/{id}',"removeCartItem")->name('removecartitem');
         Route::get('/pending-orders','pendingOrders')->name('userPendingOrders');
         Route::get('/product-history','history')->name('history');
+        Route::post('/remove-review/{id}','removeReview')->name('remove.review');
+        Route::get('/review-edit/{id}','editReview')->name('review.edit');
         Route::post('/product-review/{id}','productReviews')->name('productreviews');
     });
 });

@@ -129,7 +129,15 @@
                                         <p class="card-text">{{$review->reviews}}</p>
                                         @isset(auth()->user()->id)
                                             @if($review->user_id===auth()->user()->id)
-                                                <i class="bx bx-edit"><a href="" >Edit</a></i>
+                                                <div>
+{{--                                                    <i class="bx bx-edit"><a href="{{route('review.edit',$review->id)}}" >Edit</a></i> ||--}}
+                                                    <i class="bx bx-trash">
+                                                        <form action="{{route('remove.review',$review->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this review?')">
+                                                            @csrf
+                                                            <button class="btn btn-danger" type="submit">delete</button>
+                                                        </form>
+                                                    </i>
+                                                </div>
                                             @endif
                                         @endisset
                                     </div>

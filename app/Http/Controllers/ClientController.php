@@ -39,6 +39,11 @@ class ClientController extends Controller
 
         return back()->with('message', "Your's reviews added successfully");
     }
+    public function removeReview($id){
+        $review=Review::findOrFail($id);
+        $review->delete();
+        return back()->with('message', "Your's reviews delete successfully");
+    }
     public function addToCard(){
         $user_id=auth()->user()->id;
         $cart_items = Cart::leftJoin('products','carts.product_id','products.id')
